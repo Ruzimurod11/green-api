@@ -1,0 +1,49 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+*.env*
+!.env.example
+
+# AI context files
+.ai/
+
+# Claude Code: ignore everything except shared team config
+.claude/*
+!.claude/settings.json
+!.claude/commands/
+!.claude/hooks/
+!.claude/agents/
+.claude/settings.local.json
+
+# Generated API types (run `pnpm gen:api`)
+src/types/api.gen.ts
+
+# TanStack Router vaqtinchalik artefaktlari
+.tanstack/tmp/
+
+# Playwright MCP artefaktlari (vizual verify chiqindisi)
+# Ildiz-darajadagi skrinshotlar; haqiqiy rasmlar public/imgs/ ostida saqlanadi
+.playwright-mcp/
+/*.png

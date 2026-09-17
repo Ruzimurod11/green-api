@@ -1,0 +1,305 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "tailwind-clamp" {
+    minsize: 25rem;
+    maxsize: 90rem;
+}
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+/* exo-2-latin-wght-italic */
+/* inter-latin-wght-italic */
+@font-face {
+    font-family: "Inter Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url(@fontsource-variable/inter/files/inter-latin-wght-normal.woff2)
+        format("woff2-variations");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* inter-cyrillic-wght-normal */
+@font-face {
+    font-family: "Inter Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url(@fontsource-variable/inter/files/inter-cyrillic-wght-normal.woff2)
+        format("woff2-variations");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@theme {
+    --breakpoint-xs: 30rem;
+    /* --breakpoint-3xl: 120rem; */
+}
+@theme inline {
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+
+    /* custom colors */
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+    --color-info: var(--info);
+    --color-info-foreground: var(--info-foreground);
+}
+
+/* GenFin landing brand palette (theme-independent accents) */
+@theme {
+    --color-brand: #2196f3;
+    --color-brand-cyan: var(--brand-cyan);
+    --color-brand-teal: var(--brand-teal);
+    --color-brand-green: var(--brand-green);
+    --color-brand-purple: #a78bfa;
+    --color-brand-amber: #fbbf24;
+    --color-brand-pink: #f472b6;
+    --color-brand-red: #f87171;
+}
+
+:root {
+    --radius: 0.65rem;
+    --background: oklch(
+        0.949 0.009 247.86
+    ); /* light gray-blue base, deepened so white cards/sidebar read as surfaces — matches genfin-dashboard.html */
+    --foreground: oklch(0.083 0.005 285.823);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.083 0.005 285.823);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.083 0.005 285.823);
+    --primary: oklch(0.658 0.169 249); /* GenFin brand blue #2196f3 */
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.936 0.004 286.375);
+    --secondary-foreground: oklch(0.122 0.006 285.885);
+    --muted: oklch(0.936 0.004 286.375);
+    --muted-foreground: oklch(0.295 0.02 285.938);
+    --accent: oklch(0.936 0.004 286.375);
+    --accent-foreground: oklch(0.122 0.006 285.885);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.884 0.007 286.32);
+    --input: oklch(0.884 0.007 286.32);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.3485 0.058 259.813);
+    --chart-2: oklch(0.268 0.101 267.815);
+    --chart-3: oklch(0.235 0.137 270.881);
+    --chart-4: oklch(7.423% 0.00983 326.47);
+    --chart-5: oklch(0.182 0.11 273.638);
+    --sidebar: oklch(0.974 0.004 247.86);
+    --sidebar-foreground: oklch(0.083 0.005 285.823);
+    --sidebar-primary: oklch(0.242 0.136 270.85);
+    --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
+    --sidebar-accent: oklch(0.936 0.004 286.375);
+    --sidebar-accent-foreground: oklch(0.122 0.006 285.885);
+    --sidebar-border: oklch(0.884 0.007 286.32);
+    --sidebar-ring: oklch(0.708 0 0);
+
+    /* custom colors*/
+    --success: oklch(0.7316 0.1782 152.82);
+    --success-foreground: oklch(0.982 0.018 155.826);
+    --warning: oklch(0.795 0.184 86.047);
+    --warning-foreground: oklch(0.421 0.095 57.708);
+    --info: oklch(0.5624 0.2404 264.4);
+    --info-foreground: oklch(0.97 0.014 254.604);
+
+    /* light-mode: darker blue accent for readable contrast on white surfaces
+       (sidebar active tab, focus borders, etc.) — dark mode keeps #38bdf8 */
+    --brand-cyan: #0284c7;
+
+    /* light-mode: green text/accents darkened 20% for contrast on white
+       surfaces — dark mode keeps #22d48e */
+    --brand-green: #1baa72;
+
+    /* light-mode: teal ("Boshqa kirim") darkened 30% for contrast on white
+       surfaces — dark mode keeps #2dd4bf */
+    --brand-teal: #209486;
+}
+
+.dark {
+    --background: oklch(0.141 0.005 285.823);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(
+        0.205 0.035 262
+    ); /* navy, darker — matches genfin-dashboard.html */
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.2 0.033 257); /* navy surf, darker */
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.658 0.169 249); /* GenFin brand blue #2196f3 */
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.274 0.006 286.033);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.274 0.006 286.033);
+    --muted-foreground: oklch(0.705 0.015 286.067);
+    --accent: oklch(0.274 0.006 286.033);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.3485 0.058 259.813);
+    --chart-2: oklch(0.268 0.101 267.815);
+    --chart-3: oklch(0.235 0.137 270.881);
+    --chart-4: oklch(7.423% 0.00983 326.47);
+    --chart-5: oklch(0.182 0.11 273.638);
+    --sidebar: oklch(0.21 0.006 285.885);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.242 0.136 270.85);
+    --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
+    --sidebar-accent: oklch(0.274 0.006 286.033);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.439 0 0);
+
+    /* custom colors*/
+    --success: oklch(0.696 0.17 162.48);
+    --success-foreground: oklch(0.393 0.095 152.535);
+    --warning: oklch(0.795 0.184 86.047);
+    --warning-foreground: oklch(0.421 0.095 57.708);
+    --info: oklch(0.546 0.245 262.881);
+    --info-foreground: oklch(0.379 0.146 265.522);
+
+    /* keep the original bright cyan accent in dark mode */
+    --brand-cyan: #38bdf8;
+
+    /* keep the original bright green accent in dark mode */
+    --brand-green: #22d48e;
+
+    /* keep the original bright teal accent in dark mode */
+    --brand-teal: #2dd4bf;
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    html {
+        @apply scroll-smooth;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: "Inter Variable", sans-serif;
+    }
+    /* Thin, branded scrollbars — matches genfin-dashboard.html */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(99, 179, 237, 0.18) transparent;
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(99, 179, 237, 0.18);
+        border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(99, 179, 237, 0.32);
+    }
+    a {
+        @apply text-info;
+    }
+}
+
+@layer components {
+    [data-vc] {
+        z-index: 111;
+    }
+    /* vanilla-calendar mounts its popup on <body>; a modal Radix dialog sets
+       body { pointer-events: none }, which the popup inherits — blocking the
+       month/year title drill-down and date clicks. Opt the popup back in. */
+    [data-vc="calendar"] {
+        pointer-events: auto;
+    }
+    [data-radix-popper-content-wrapper] {
+        @apply min-w-[unset]!;
+    }
+}
+
+/* GenFin boot-loader bouncing dots (matches the dashboard mockup). */
+@keyframes bb {
+    0%,
+    80%,
+    100% {
+        transform: scale(0.5);
+        opacity: 0.4;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* "Reja" operatsiyalari belgisi. Lucide Hourglass 180° ga nisbatan simmetrik,
+   shuning uchun sikl oxiridagi 180deg → 0deg qaytishi ko'zga tashlanmaydi. */
+@theme {
+    --animate-hourglass: hourglass-flip 3s cubic-bezier(0.7, -0.3, 0.3, 1.3)
+        infinite;
+
+    @keyframes hourglass-flip {
+        0%,
+        60% {
+            transform: rotate(0deg);
+        }
+        78%,
+        100% {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+@layer utilities {
+    .title {
+        @apply clamp-[text,xl,2xl] font-bold;
+    }
+    .title-2 {
+        @apply clamp-[text,2xl,3xl] font-bold;
+    }
+    .card-hover-effect {
+        @apply hover:scale-[1.01]
+    hover:shadow-primary/40 hover:shadow-lg shadow transition-all;
+    }
+    .card-active-effect {
+        @apply scale-[1.02] hover:scale-[1.02]
+    shadow-primary/40 shadow-lg ring-4;
+    }
+}

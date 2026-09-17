@@ -1,0 +1,13 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(pnpm tsc)",
+            "Bash(pnpm tsc *)",
+            "Bash(pnpm lint)",
+            "Bash(pnpm lint *)",
+            "Bash(pnpm exec eslint *)",
+            "Bash(pnpm exec prettier *)",
+            "mcp__ide__getDiagnostics"
+        ]
+    }
+}

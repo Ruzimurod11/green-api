@@ -1,0 +1,19 @@
+export default function IconCodeTag() {
+    return (
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M15 7L20 12L15 17M9 17L4 12L9 7"
+                stroke="#1E1E1E"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    )
+}
