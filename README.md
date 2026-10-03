@@ -1,165 +1,165 @@
-# React SPA boshlang'ich shabloni
+# React SPA starter template
 
-Ishlab chiqarishga tayyor infratuzilma bilan jihozlangan, **bo'sh** React 19 SPA
-skeleti. Yangi loyihani noldan yig'ish o'rniga shu shablondan boshlanadi: auth,
-data-layer, i18n, forma, jadval, xato-chegaralari va monitoring allaqachon
-o'rnatilgan — faqat marshrut va sahifa qo'shiladi.
+A **blank** React 19 SPA skeleton with production-ready infrastructure already
+wired in. Start a new project from this template instead of assembling it from
+scratch: auth, the data layer, i18n, forms, tables, error boundaries, and
+monitoring are already set up — you only add routes and pages.
 
-> Shablon GenFin loyihasidan «stripped» qilib olingan: barcha biznes sahifalar
-> va multi-tenant qatlami olib tashlangan, faqat qayta ishlatiladigan yadro
-> qoldirilgan. Bosh sahifa (`/`) — oddiy «Hello World».
+> The template was stripped from the GenFin project: all business pages and the
+> multi-tenant layer were removed, leaving only the reusable core. The home
+> page (`/`) is a plain "Hello World".
 
-## Texnologiyalar
+## Stack
 
-| Qatlam         | Tanlov                                                  |
+| Layer          | Choice                                                  |
 | -------------- | ------------------------------------------------------- |
-| UI             | React 19.2 (React Compiler yoqilgan)                    |
+| UI             | React 19.2 (React Compiler enabled)                     |
 | Build / dev    | Vite 8                                                  |
-| Marshrutlash   | TanStack Router (fayl asosida, `autoCodeSplitting`)     |
-| Server-state   | TanStack Query                                          |
-| Jadval         | TanStack Table + Virtual                                |
-| Stillar        | Tailwind CSS v4 (`@tailwindcss/vite`)                   |
-| UI primitivlar | shadcn/ui (new-york) — Radix asosida                    |
-| Forma          | react-hook-form + zod v4                                |
-| Klient-state   | Zustand (`persist`)                                     |
-| HTTP           | axios (yagona instance, interceptor'lar)                |
+| Routing        | TanStack Router (file-based, `autoCodeSplitting`)       |
+| Server state   | TanStack Query                                          |
+| Tables         | TanStack Table + Virtual                                |
+| Styles         | Tailwind CSS v4 (`@tailwindcss/vite`)                   |
+| UI primitives  | shadcn/ui (new-york) — Radix-based                      |
+| Forms          | react-hook-form + zod v4                                |
+| Client state   | Zustand (`persist`)                                     |
+| HTTP           | axios (single instance, interceptors)                   |
 | i18n           | i18next — **uz** (default) / **ru** (fallback) / **en** |
-| Monitoring     | Sentry (DSN bo'lsa yoqiladi)                            |
-| Testlar        | Vitest + Testing Library                                |
+| Monitoring     | Sentry (enabled when a DSN is set)                      |
+| Tests          | Vitest + Testing Library                                |
 
-Paket menejeri — **pnpm**, Node — **24** (Volta orqali pinlangan).
+Package manager is **pnpm**. Node is **24** (pinned via Volta).
 
-## Boshlash
+## Getting started
 
 ```bash
 pnpm install
-cp .env.example .env      # keyin qiymatlarni to'ldiring
+cp .env.example .env      # then fill in the values
 pnpm dev                  # http://localhost:3000
 ```
 
 ### `.env`
 
 ```env
-VITE_DEFAULT_URL=https://api.hello.uz/api/v1/   # backend BASE_URL (/api/... bilan)
-VITE_PORT=3000                                  # dev server porti (ixtiyoriy)
-VITE_SENTRY_DSN=                                # bo'sh bo'lsa Sentry o'chiq
+VITE_DEFAULT_URL=https://api.hello.uz/api/v1/   # backend BASE_URL (with /api/...)
+VITE_PORT=3000                                  # dev server port (optional)
+VITE_SENTRY_DSN=                                # Sentry stays off when empty
 ```
 
-Dev'da so'rovlar Vite proxy orqali (`/__api` → backend) same-origin ketadi,
-shuning uchun **CORS umuman yuzaga kelmaydi** va portni xohlagancha o'zgartirsa
-bo'ladi.
+In development, requests go through the Vite proxy (`/__api` → backend) as
+same-origin, so **CORS never applies** and you can change the port freely.
 
-## Skriptlar
+## Scripts
 
-| Buyruq                    | Vazifasi                                             |
-| ------------------------- | ---------------------------------------------------- |
-| `pnpm dev`                | Dev server (port 3000)                               |
-| `pnpm build`              | `tsc -b` + `vite build`                              |
-| `pnpm preview`            | Ishlab chiqarish build'ini ko'rish                   |
-| `pnpm tsc`                | Faqat typecheck (`--noEmit`)                         |
-| `pnpm lint`               | ESLint (butun repo)                                  |
-| `pnpm lint:i18n`          | Locale JSON'lar orasidagi kalit drift'ini tekshirish |
-| `pnpm test`               | Vitest (bir marta)                                   |
-| `pnpm test:watch`         | Vitest watch rejimi                                  |
-| `pnpm test:coverage-gate` | Kritik-yo'l test qamrovi gate'i                      |
+| Command                   | Purpose                                      |
+| ------------------------- | -------------------------------------------- |
+| `pnpm dev`                | Dev server (port 3000)                       |
+| `pnpm build`              | `tsc -b` + `vite build`                      |
+| `pnpm preview`            | Preview the production build                 |
+| `pnpm tsc`                | Typecheck only (`--noEmit`)                  |
+| `pnpm lint`               | ESLint (entire repo)                         |
+| `pnpm lint:i18n`          | Check locale JSONs for key drift             |
+| `pnpm test`               | Vitest (single run)                          |
+| `pnpm test:watch`         | Vitest watch mode                            |
+| `pnpm test:coverage-gate` | Critical-path test coverage gate             |
 
-**Pre-commit** (husky + lint-staged): staged fayllarda typecheck, `eslint
---max-warnings=0` va prettier ishlaydi; locale JSON o'zgarsa i18n tekshiruvi
-ham. Lint **nol ogohlantirish** bilan o'tishi shart.
+**Pre-commit** (husky + lint-staged): typecheck, `eslint --max-warnings=0`, and
+prettier run on staged files; the i18n check also runs when a locale JSON
+changes. Lint must pass with **zero warnings**.
 
-## Loyiha strukturasi
+## Project structure
 
 ```
 src/
-├── routes/                 # TanStack fayl-marshrutlar (routeTree.gen.ts — avto)
-│   ├── __root.tsx          # ildiz layout (providerlar + <Outlet/>)
+├── routes/                 # TanStack file routes (routeTree.gen.ts — generated)
+│   ├── __root.tsx          # root layout (providers + <Outlet/>)
 │   └── index.tsx           # "/" — Hello World
 ├── components/
-│   ├── ui/                 # shadcn/ui primitivlar (Radix)
-│   ├── form/               # react-hook-form + zod forma nazoratlari
-│   ├── custom/             # ilova-spetsifik kompozitlar (modal, jadval, ...)
-│   ├── search-param/       # URL search-param bilan bog'langan filtrlar
-│   ├── layouts/            # layout wrapper'lar
-│   └── semantic/           # semantik matn/guruh primitivlari
+│   ├── ui/                 # shadcn/ui primitives (Radix)
+│   ├── form/               # react-hook-form + zod form controls
+│   ├── custom/             # app-specific composites (modal, table, ...)
+│   ├── search-param/       # filters bound to URL search params
+│   ├── layouts/            # layout wrappers
+│   └── semantic/           # semantic text/group primitives
 ├── hooks/
 │   ├── react-query/        # useGet / useInfinite / useRequest / mutations ...
-│   └── store/              # Zustand persist store'lar
+│   └── store/              # Zustand persist stores
 ├── lib/
 │   ├── api/                # axios-instance + default-requests
 │   ├── constants/          # api-endpoints, cookies, modal-keys ...
-│   ├── i18n/               # i18next sozlamasi + locales/{uz,ru,en}.json
+│   ├── i18n/               # i18next setup + locales/{uz,ru,en}.json
 │   ├── monitoring/         # Sentry
 │   ├── utils/              # format, cookie-service, on-error ...
-│   └── validation/         # zod helper'lar
-├── providers/              # Theme / Language / Modal / Confirm provayderlar
-├── types/                  # domen tiplar (api, auth, common ...)
-└── @types/                 # i18next d.ts + resurs tiplari
+│   └── validation/         # zod helpers
+├── providers/              # Theme / Language / Modal / Confirm providers
+├── types/                  # domain types (api, auth, common ...)
+└── @types/                 # i18next d.ts + resource types
 ```
 
-## Asosiy konventsiyalar
+## Core conventions
 
-- **Prettier**: 4 bo'shliq, **nuqtali vergul yo'q**, ikkilik qo'shtirnoq, 80
-  ustun, trailing comma. Import'lar `prettier-plugin-organize-imports` bilan
-  avtomatik tartiblanadi.
+- **Prettier**: 4-space indent, **no semicolons**, double quotes, 80 columns,
+  trailing commas. Imports are auto-organized by
+  `prettier-plugin-organize-imports`.
 - **Import alias**: `@/` → `src/`.
 - **TS strict** + `noUnusedLocals`/`noUnusedParameters`. `verbatimModuleSyntax`
-  yoqilgan — tip-only importlarda `import type` ishlating.
-- **React Compiler** yoqilgan — `useMemo`/`useCallback` ni faqat to'g'rilik
-  uchun qo'lda yozing, perf uchun emas.
+  is on — use `import type` for type-only imports.
+- **React Compiler** is enabled — write `useMemo`/`useCallback` by hand only
+  for correctness, not for performance.
 
-## Arxitektura qisqacha
+## Architecture in brief
 
-### Data-layer
+### Data layer
 
-- `lib/api/axios-instance.ts` — yagona axios instance. Request interceptor
-  cookie'dan `Bearer` token qo'yadi; response interceptor 401'da
-  `accounts/token/refresh/` orqali tokenni yangilab, so'rovni **bir marta**
-  qayta yuboradi, aks holda tokenlarni tozalaydi.
-- API yo'llari `lib/constants/api-endpoints.ts` (`API.*`) da markazlashgan —
-  URL'larni qo'lda yozmang, shu obyektga qo'shing.
+- `lib/api/axios-instance.ts` — single axios instance. The request interceptor
+  attaches a `Bearer` token from cookies; the response interceptor refreshes
+  the token via `accounts/token/refresh/` on 401, retries the request
+  **once**, and otherwise clears the tokens.
+- API paths are centralized in `lib/constants/api-endpoints.ts` (`API.*`) —
+  do not hardcode URLs; add them to this object.
 
-### React Query hook'lari (`hooks/react-query/`)
+### React Query hooks (`hooks/react-query/`)
 
 - `useGet(url, { deps, params, config, options })` — `useQuery` wrapper.
-- `useInfinite(url, { cursorKey, ... })` — `{ count, next, previous, results }`
-  paginatsiya shaklini kutadi.
-- `useRequest()` — generic mutatsiya (`post/put/patch/remove` + upload progress).
-- Barcha mutatsiyalar default `onError` (`lib/utils/on-error.ts`) bilan
-  server xatolarini `sonner` toast qiladi.
+- `useInfinite(url, { cursorKey, ... })` — expects a
+  `{ count, next, previous, results }` pagination shape.
+- `useRequest()` — generic mutation (`post/put/patch/remove` + upload
+  progress).
+- All mutations default to `onError` (`lib/utils/on-error.ts`), which toasts
+  server errors via `sonner`.
 
-### Provayderlar (`main.tsx` / `__root.tsx`)
+### Providers (`main.tsx` / `__root.tsx`)
 
 `ErrorBoundary` → `I18nextProvider` → `ThemeProvider` → `ConfirmProvider` →
-`TooltipProvider` → `QueryClientProvider` → `RouterProvider`. Har marshrut o'z
-`RouteErrorBoundary` chegarasiga ega.
+`TooltipProvider` → `QueryClientProvider` → `RouterProvider`. Each route has
+its own `RouteErrorBoundary`.
 
 ### i18n
 
-- Standart til **uz**, fallback **ru**; `en` qo'shimcha. Til `lang` cookie'da
-  saqlanadi va `Accept-Language` sifatida yuboriladi.
-- Kalitlar **tip-tekshiriladi** (`@types/resources.ts` + `i18next.d.ts`) —
-  `en.json` tip manbasi. Yangi kalitni **uchala** locale'ga ham qo'shing.
+- Default language is **uz**, fallback is **ru**; **en** is additional. The
+  language is stored in the `lang` cookie and sent as `Accept-Language`.
+- Keys are **type-checked** (`@types/resources.ts` + `i18next.d.ts`) —
+  `en.json` is the type source. Add every new key to **all three** locales.
 
-### Auth & state
+### Auth and state
 
-- JWT tokenlar cookie'da (`CookieService`). Zustand `persist` bilan klient
-  holati (oxirgi sahifa, sidebar) saqlanadi; kalitlar
-  `lib/constants/localstorage.ts` da.
+- JWT tokens live in cookies (`CookieService`). Zustand `persist` stores
+  client state (last page, sidebar); keys are in
+  `lib/constants/localstorage.ts`.
 
-## Yangi sahifa qo'shish
+## Adding a new page
 
-1. `src/routes/` ichida fayl yarating (masalan `about.tsx`) —
+1. Create a file under `src/routes/` (for example `about.tsx`) —
    `export const Route = createFileRoute("/about")({ component: ... })`.
-   `routeTree.gen.ts` Vite plagini tomonidan **avtomatik** yangilanadi.
-2. Kerak bo'lsa yon-yonida `-components/`, `-hooks/`, `-types/` (dash prefiks)
-   papkalarini qo'shing — ular marshrut emas, o'sha sahifa yordamchilari.
-3. Backend so'rovlari uchun endpoint'ni `api-endpoints.ts` ga qo'shib,
-   `useGet`/`useRequest` bilan chaqiring.
-4. Foydalanuvchiga ko'rinadigan matnlarni to'g'ridan-to'g'ri yozmang —
-   i18n kaliti sifatida uchala locale'ga qo'shing.
+   `routeTree.gen.ts` is updated **automatically** by the Vite plugin.
+2. If needed, add colocated `-components/`, `-hooks/`, and `-types/` folders
+   (dash prefix) next to it — they are helpers for that page, not routes.
+3. For backend requests, add the endpoint to `api-endpoints.ts` and call it
+   with `useGet` / `useRequest`.
+4. Do not hardcode user-facing copy — add it as an i18n key in all three
+   locales.
 
 ## Deploy
 
-`vercel.json` mavjud — SPA rewrite bilan Vercel'ga tayyor. `pnpm build`
-`dist/` ga statik build chiqaradi; `vite-plugin-sitemap` sitemap va
-`robots.txt` yaratadi (hostname'ni `vite.config.ts` da moslang).
+`vercel.json` is included — ready for Vercel with an SPA rewrite. `pnpm build`
+emits a static build to `dist/`; `vite-plugin-sitemap` generates the sitemap
+and `robots.txt` (set the hostname in `vite.config.ts`).
