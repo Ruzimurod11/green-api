@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query"
 import { createRouter, RouterProvider } from "@tanstack/react-router"
 import type { AxiosError } from "axios"
-import { StrictMode, Suspense } from "react"
+import { Suspense } from "react"
 import { createRoot } from "react-dom/client"
 import { I18nextProvider } from "react-i18next"
 import { ErrorBoundary } from "./components/custom/error-boundary"
@@ -82,23 +82,23 @@ const rootElement = document.getElementById("root")!
 if (!rootElement.innerHTML) {
     const root = createRoot(rootElement)
     root.render(
-        <StrictMode>
-            <ErrorBoundary>
-                <I18nextProvider i18n={i18n}>
-                    <Suspense fallback={<Loader />}>
-                        <ThemeProvider>
-                            <ConfirmProvider>
-                                <TooltipProvider>
-                                    <QueryClientProvider client={queryClient}>
-                                        <RouterProvider router={router} />
-                                        <Toaster />
-                                    </QueryClientProvider>
-                                </TooltipProvider>
-                            </ConfirmProvider>
-                        </ThemeProvider>
-                    </Suspense>
-                </I18nextProvider>
-            </ErrorBoundary>
-        </StrictMode>,
+        // <StrictMode>
+        <ErrorBoundary>
+            <I18nextProvider i18n={i18n}>
+                <Suspense fallback={<Loader />}>
+                    <ThemeProvider>
+                        <ConfirmProvider>
+                            <TooltipProvider>
+                                <QueryClientProvider client={queryClient}>
+                                    <RouterProvider router={router} />
+                                    <Toaster />
+                                </QueryClientProvider>
+                            </TooltipProvider>
+                        </ConfirmProvider>
+                    </ThemeProvider>
+                </Suspense>
+            </I18nextProvider>
+        </ErrorBoundary>,
+        // </StrictMode>,
     )
 }

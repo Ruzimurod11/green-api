@@ -1,4 +1,7 @@
 // src/routes/index.tsx
+import { ChatWindow } from "@/components/chat/chat-window" // Окно чата справа
+import { Sidebar } from "@/components/chat/sidebar"
+import { useGreenApiPolling } from "@/hooks/use-green-api-polling" // Ваш хук для поллинга
 import { createFileRoute, redirect } from "@tanstack/react-router"
 import { useAuthStore } from "./_auth/-hooks/use-auth-persist"
 
@@ -35,15 +38,20 @@ export const Route = createFileRoute("/")({
 })
 
 function Home() {
+    // Включаем фоновый опрос входящих сообщений
+    useGreenApiPolling()
+
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center gap-2 p-6 text-center">
-            <h1 className="text-3xl font-extrabold tracking-tight">
-                GREEN-API Chat Workspace
-            </h1>
-            <p className="text-muted-foreground text-sm">
-                Xush kelibsiz! Chatlarni boshlash uchun chap menyudan
-                foydalaning.
-            </p>
+        <div className="flex h-screen w-screen overflow-hidden bg-[#111923]">
+            {/* 1. Левая панель (Sidebar) — фиксированная ширина, во всю высоту */}
+            <aside className="w-80 md:w-96 shrink-0 h-full border-r border-gray-800">
+                <Sidebar />
+            </aside>
+
+            {/* 2. Правая часть (Chat Window) — занимает всё оставшееся пространство */}
+            <main className="flex-1 h-full flex flex-col">
+                <ChatWindow />
+            </main>
         </div>
     )
 }
